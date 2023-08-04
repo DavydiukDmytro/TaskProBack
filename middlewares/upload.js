@@ -5,7 +5,7 @@ const tmpDir = path.join(__dirname, '../', 'tmp');
 const multerCongig = multer.diskStorage({
   destination: tmpDir,
   filename: (req, file, cd) => {
-    cd(null, file.originalname);
+    cd(null, Math.random() + '-' + file.originalname);
   },
 });
 
