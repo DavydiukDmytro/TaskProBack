@@ -12,9 +12,14 @@ const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
 });
 
+const themeSchema = Joi.object({
+  theme: Joi.string().valid('dark', 'light', 'violet').required(),
+});
+
 const schemasUser = {
   registerSchema,
   loginSchema,
+  themeSchema,
 };
 
 module.exports = schemasUser;

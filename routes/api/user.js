@@ -29,6 +29,11 @@ router.patch(
   updateAvatar
 );
 router.get('/current', controllerWrapper(authenticate), current);
-router.patch('/theme', controllerWrapper(authenticate), updateTheme);
+router.patch(
+  '/theme',
+  validateBody(schemasUser.themeSchema),
+  controllerWrapper(authenticate),
+  updateTheme
+);
 
 module.exports = router;
