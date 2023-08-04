@@ -3,11 +3,14 @@ const path = require('path');
 const { requestError } = require('../helpers');
 const updateImg = require('../cloudinary/updateImg');
 const fs = require('fs').promises;
+require('dotenv').config();
+
+const { CLOUD_NAME, CLOUD_API_KEY, CLOUD_SECRET } = process.env;
 
 cloudinary.config({
-  cloud_name: 'dw3h1zhqf',
-  api_key: '278961358311597',
-  api_secret: '6pb-sMlcFZyOf3rsdwY7fZQnyJs',
+  cloud_name: CLOUD_NAME,
+  api_key: CLOUD_API_KEY,
+  api_secret: CLOUD_SECRET,
 });
 
 const saveImg = async (req, res, next) => {
