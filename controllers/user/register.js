@@ -32,7 +32,8 @@ const register = async (req, res) => {
     user: {
       email,
       name,
-      theme: user.theme,
+      avatarUrl: null,
+      theme: 'dark',
     },
   });
 };
