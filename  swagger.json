@@ -1,0 +1,14 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task Pro",
+    "version": "1.0.0",
+    "description": "Welcome to TaskPro app, developed by a talented team of GoIt  school. TaskPro is designed to help you stay organized, whether it's in your professional workspace or personal life. This app allowing users to create boards where they can organize their tasks into columns. The application offers a wide range of features related to boards and tasks, including the creation, updating, and deletion of boards, columns, and tasks. Additionally, TaskPro offers three different themes to choose from and the ability to customize the background of your boards. Our main goal was to provide an intuitive and user-friendly interface to enhance your productivity and help you achieve your goals effectively. We hope we have succeeded in creating a beautiful and functional application."
+  },
+  "servers": [
+    {
+      "url": "https://task-pro.onrender.com/",
+      "description": "Backend server"
+    }
+  ]
+}
