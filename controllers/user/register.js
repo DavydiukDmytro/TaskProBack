@@ -1,7 +1,10 @@
 const bcrypt = require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
 const { requestError } = require('../../helpers');
 const User = require('../../models/user');
+require('dotenv').config();
+
+const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {
   const { email, password, name } = req.body;
@@ -20,8 +23,18 @@ const register = async (req, res) => {
     password: hashPassword,
   });
 
+  const token = jwt.sign({ id: newUser._id }, SECRET_KEY, { expiresIn: '2h' });
+
+  await User.findByIdAndUpdate(newUser._id, { token });
+
   res.status(201).json({
-    email: newUser.email,
+    token,
+    user: {
+      email,
+      name,
+      avatarUrl: null,
+      theme: 'dark',
+    },
   });
 };
 
