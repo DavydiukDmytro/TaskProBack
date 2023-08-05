@@ -1,6 +1,11 @@
 const controllerWrapper = require('./controllerWrapper');
 const requestError = require('./requestError');
-const validateBody = require('./validateBody');
-const hendleMongooseError = require('./hendleMongooseError')
+const validateBody = require('../middlewares/validateBody');
+const handleMongooseError = require('./handleMongooseError');
 
-module.exports = { requestError, controllerWrapper, validateBody, hendleMongooseError };
+module.exports = {
+  requestError,
+  controllerWrapper,
+  validateBody,
+  handleMongooseError,
+};
