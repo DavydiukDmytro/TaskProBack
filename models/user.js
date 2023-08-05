@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const handleMongooseError = require('../helpers');
+// const handleMongooseError = require('../helpers');
 const emailRegexp = require('../schemas/emailRegexp');
 
 const userSchema = new Schema(
@@ -40,7 +40,7 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.post('save', handleMongooseError);
+// userSchema.post('save', handleMongooseError);
 
 const User = model('user', userSchema);
 
