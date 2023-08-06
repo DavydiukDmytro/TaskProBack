@@ -1,5 +1,5 @@
 const express = require('express');
-const { validateBody, controllerWrapper } = require('../../helpers');
+const { controllerWrapper } = require('../../helpers');
 
 const {
   login,
@@ -9,7 +9,12 @@ const {
   current,
   updateTheme,
 } = require('../../controllers/user');
-const { authenticate, upload, saveImg } = require('../../middlewares');
+const {
+  authenticate,
+  upload,
+  saveImg,
+  validateBody,
+} = require('../../middlewares');
 const schemasUser = require('../../schemas/schemasUser');
 
 const router = express.Router();
@@ -20,19 +25,19 @@ router.post(
   register
 );
 router.post('/login', validateBody(schemasUser.loginSchema), login);
-router.post('/logout', controllerWrapper(authenticate), logout);
+router.post('/logout', authenticate, logout);
 router.patch(
   '/avatar',
-  controllerWrapper(authenticate),
+  authenticate,
   upload.single('avatar'),
   controllerWrapper(saveImg),
   updateAvatar
 );
-router.get('/current', controllerWrapper(authenticate), current);
+router.get('/current', authenticate, current);
 router.patch(
   '/theme',
   validateBody(schemasUser.themeSchema),
-  controllerWrapper(authenticate),
+  authenticate,
   updateTheme
 );
 

@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const { handleMongooseError } = require('../helpers');
-const Joi = require('joi');
 
 const columnSchema = new Schema(
   {
@@ -23,24 +22,8 @@ const columnSchema = new Schema(
   { versionKey: false, timestamps: false }
 );
 
-const addSchema = Joi.object({
-  title: Joi.string().required(),
-  board: Joi.string()
-    .regex(/^[0-9a-fA-F]{24}$/)
-    .required(),
-});
-
-const updateSchema = Joi.object({
-  title: Joi.string().required(),
-});
-
-const schemas = {
-  addSchema,
-  updateSchema,
-};
-
 columnSchema.post('save', handleMongooseError);
 
 const Column = model('Column', columnSchema);
 
-module.exports = { Column, schemas };
+module.exports = Column;

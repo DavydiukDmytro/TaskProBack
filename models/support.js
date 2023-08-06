@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const { handleMongooseError } = require('../helpers');
-const Joi = require('joi');
 
 const supportSchema = new Schema(
   {
@@ -16,20 +15,8 @@ const supportSchema = new Schema(
   { versionKey: false }
 );
 
-const addSchema = Joi.object({
-  email: Joi.string().email().required(),
-  message: Joi.string().required(),
-});
-
-const schemas = {
-  addSchema,
-};
-
 supportSchema.post('save', handleMongooseError);
 
 const SupportMail = model('support', supportSchema);
 
-module.exports = {
-  SupportMail,
-  schemas,
-};
+module.exports = SupportMail;

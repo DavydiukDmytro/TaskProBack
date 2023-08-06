@@ -1,0 +1,19 @@
+const { requestError } = require('../../helpers');
+const Column = require('../../models/column');
+
+const updateColumn = async (req, res) => {
+  const { columnId } = req.params;
+  const result = await Column.findByIdAndUpdate(
+    columnId,
+    { title: req.body.title },
+    {
+      new: true,
+    }
+  );
+  if (!result) {
+    throw requestError(404, 'Not found');
+  }
+  res.status(200).json({ message: 'Successful update' });
+};
+
+module.exports = updateColumn;
