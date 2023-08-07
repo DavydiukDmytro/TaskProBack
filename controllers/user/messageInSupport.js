@@ -1,5 +1,6 @@
 const { requestError } = require('../../helpers');
 const User = require('../../models/user');
+const SupportMail = require('../../models/support');
 const { support, merkupLetter } = require('../support');
 
 const messageInSupport = async (req, res) => {
@@ -11,6 +12,8 @@ const messageInSupport = async (req, res) => {
   if (!user) {
     throw requestError(404, 'User not found');
   }
+
+  await SupportMail.create({ ...req.body });
 
   const userName = user.name;
   const userEmail = email;
