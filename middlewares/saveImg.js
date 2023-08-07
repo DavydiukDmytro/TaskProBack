@@ -15,7 +15,8 @@ cloudinary.config({
 
 const saveImg = async (req, res, next) => {
   if (!req.file) {
-    throw requestError(400, 'File is require!');
+    next();
+    return;
   }
   const { filename } = req.file;
   const imgPath = path.resolve(__dirname, '../tmp', filename);
@@ -30,7 +31,6 @@ const saveImg = async (req, res, next) => {
     const img = await updateImg(result.public_id);
     req.avatarUrl = img;
     await fs.unlink(imgPath);
-    console.log(img);
   } catch (error) {
     throw requestError(500, 'The problem of saving photos.');
   }

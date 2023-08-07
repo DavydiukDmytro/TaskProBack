@@ -5,7 +5,7 @@ const {
   login,
   register,
   logout,
-  updateAvatar,
+  updateUser,
   current,
   updateTheme,
 } = require('../../controllers/user');
@@ -27,11 +27,11 @@ router.post(
 router.post('/login', validateBody(schemasUser.loginSchema), login);
 router.post('/logout', authenticate, logout);
 router.patch(
-  '/avatar',
+  '/update',
   authenticate,
   upload.single('avatar'),
   controllerWrapper(saveImg),
-  updateAvatar
+  updateUser
 );
 router.get('/current', authenticate, current);
 router.patch(
