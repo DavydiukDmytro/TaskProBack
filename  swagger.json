@@ -10,5 +10,411 @@
       "url": "https://task-pro.onrender.com/",
       "description": "Backend server"
     }
-  ]
+  ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "Endpoints related to users"
+    },
+    {
+      "name": "Board",
+      "description": "Endpoints related to boards"
+    },
+    {
+      "name": "Column",
+      "description": "Endpoints related to columns"
+    },
+    {
+      "name": "Task",
+      "description": "Endpoints related to tasks"
+    },
+    {
+      "name": "Support",
+      "description": "Endpoint for sending emails to support"
+    }
+  ],
+  "paths": {
+    "/user/register": {
+      "post": {
+        "summary": "Register new user",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful registration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "example": "Successful registration"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email in use"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "Login user",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse",
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Wrong email or password"
+          }
+        }
+      }
+    },
+    "/user/current": {
+      "get": {
+        "summary": "Check user",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse",
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/user/theme": {
+      "patch": {
+        "summary": "Update user's theme",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/UserThemeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "theme": {
+                      "type": "string",
+                      "description": "User's updated theme",
+                      "example": "dark"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "There is no theme"
+          }
+        }
+      }
+    },
+    "/user/update": {
+      "put": {
+        "summary": "Update user",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#components/schemas/UserUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#components/schemas/UserUpdateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "summary": "User's logout",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "Authorization Token",
+            "in": "header",
+            "description": "Bearer authorization token",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Logout success"
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's email",
+            "example": "John.Smith@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 32,
+            "description": "User's password",
+            "example": "qwerty1234"
+          }
+        },
+        "required": ["email", "password", "name"]
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's email",
+            "example": "John.Smith@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 32,
+            "description": "User's password",
+            "example": "qwerty1234"
+          }
+        },
+        "required": ["email", "password"]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John"
+          },
+          "theme": {
+            "type": "string",
+            "enum": ["light", "dark", "violet"],
+            "description": "User's theme",
+            "example": "dark"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar"
+          }
+        }
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's email",
+            "example": "John.Smith@gmail.com"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar"
+          },
+          "theme": {
+            "type": "string",
+            "enum": ["light", "dark", "violet"],
+            "description": "User's theme",
+            "example": "dark"
+          }
+        }
+      },
+      "UserThemeRequest": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "description": "User's theme",
+            "enum": ["dark", "light", "violet"],
+            "example": "violet"
+          }
+        },
+        "required": "theme"
+      },
+      "UserUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar file"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's email",
+            "example": "John.Smith@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 32,
+            "description": "User's password",
+            "example": "qwerty1234"
+          }
+        },
+        "required": ["name", "email", "password"]
+      },
+      "UserUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": ["string", "null"],
+            "nullable": true,
+            "description": "URL or null",
+            "example": "https://res.cloudinary.com/"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "example": "John.Smith@gmail.com"
+          }
+        }
+      }
+    }
+  }
 }
