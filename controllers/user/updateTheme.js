@@ -12,7 +12,7 @@ const updateTheme = async (req, res) => {
     { theme },
     { new: true }
   );
-  res.json({
+  res.status(200).json({
     user: {
       email: result.email,
       theme: result.theme,

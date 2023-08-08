@@ -5,7 +5,7 @@ const current = async (req, res, next) => {
   if (!user) {
     throw requestError(401, 'Not authorized');
   }
-  res.json({
+  res.status(200).json({
     user: {
       email: user.email,
       name: user.name,
