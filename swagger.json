@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://task-pro.onrender.com/",
+      "url": "https://task-pro.onrender.com/api",
       "description": "Backend server"
     }
   ],
@@ -34,7 +34,7 @@
     }
   ],
   "paths": {
-    "/user/register": {
+    "/user/registration": {
       "post": {
         "summary": "Register new user",
         "tags": ["User"],
@@ -116,10 +116,11 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDJhYzRlYTE0NDA3YjRkZTYxNDEzZiIsImlhdCI6MTY5MTUyODQ2MSwiZXhwIjoxNjkxNTM1NjYxfQ.jDTKRIEVTd00tXFDmpo_B9LfMYxjSQv6wGDL8qp6uKY"
             }
           }
         ],
+        "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
             "description": "Success",
@@ -154,6 +155,7 @@
             }
           }
         ],
+        "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -205,13 +207,14 @@
             }
           }
         ],
+        "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#components/schemas/UserUpdateRequest"
+                "$ref": "#/components/schemas/UserUpdateRequest"
               }
             }
           }
@@ -223,7 +226,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#components/schemas/UserUpdateResponse"
+                  "$ref": "#/components/schemas/UserUpdateResponse"
                 }
               }
             }
@@ -239,7 +242,7 @@
           {
             "name": "Authorization Token",
             "in": "header",
-            "description": "Bearer authorization token",
+            "description": "Bearer token",
             "required": true,
             "schema": {
               "type": "string",
@@ -247,6 +250,7 @@
             }
           }
         ],
+        "security": [{ "Bearer": [] }],
         "responses": {
           "204": {
             "description": "Logout success"
@@ -272,7 +276,7 @@
             "type": "string",
             "format": "email",
             "description": "User's email",
-            "example": "John.Smith@gmail.com"
+            "example": "john.smith@gmail.com"
           },
           "password": {
             "type": "string",
@@ -291,7 +295,7 @@
             "type": "string",
             "format": "email",
             "description": "User's email",
-            "example": "John.Smith@gmail.com"
+            "example": "john.smith@gmail.com"
           },
           "password": {
             "type": "string",
@@ -340,7 +344,7 @@
             "type": "string",
             "format": "email",
             "description": "User's email",
-            "example": "John.Smith@gmail.com"
+            "example": "john.smith@gmail.com"
           },
           "avatar": {
             "type": "string",
@@ -364,7 +368,7 @@
             "example": "violet"
           }
         },
-        "required": "theme"
+        "required": ["theme"]
       },
       "UserUpdateRequest": {
         "type": "object",
@@ -382,7 +386,7 @@
             "type": "string",
             "format": "email",
             "description": "User's email",
-            "example": "John.Smith@gmail.com"
+            "example": "john.smith@gmail.com"
           },
           "password": {
             "type": "string",
@@ -398,7 +402,7 @@
         "type": "object",
         "properties": {
           "avatar": {
-            "type": ["string", "null"],
+            "type": "string",
             "nullable": true,
             "description": "URL or null",
             "example": "https://res.cloudinary.com/"
@@ -411,9 +415,16 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "example": "John.Smith@gmail.com"
+            "example": "john.smith@gmail.com"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
