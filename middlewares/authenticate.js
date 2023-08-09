@@ -11,9 +11,9 @@ const authenticate = async (req, res, next) => {
   const { authorization = '' } = req.headers;
   const [type, token] = authorization.split(' ');
 
-  // if (type !== 'Bearer') {
-  //   throw requestError(401, 'Token type is not valid');
-  // }
+  if (type !== 'Bearer') {
+    throw requestError(401, 'Token type is not valid');
+  }
   if (!token) {
     throw requestError(401, 'No token provider');
   }
