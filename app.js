@@ -2,11 +2,11 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDoc = require('./ swagger.json');
+const swaggerDoc = require('./swagger.json');
 
 const userRouter = require('./routes/api/user');
 const boardRouter = require('./routes/api/board');
-const supportRouter = require('./routes/api/support');
+// const supportRouter = require('./routes/api/support');
 
 const app = express();
 
