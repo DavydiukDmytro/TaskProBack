@@ -26,7 +26,7 @@ router.post(
 );
 router.post('/login', validateBody(schemasUser.loginSchema), login);
 router.post('/logout', authenticate, logout);
-router.put(
+router.patch(
   '/update',
   authenticate,
   upload.single('avatar'),
