@@ -3,21 +3,20 @@ const Column = require('../../models/column');
 const Task = require('../../models/task');
 
 const addTask = async (req, res) => {
-  const { columnId } = req.params;
-  const column = await Column.findById(columnId).populate('tasks');
+  const { columnId, title, description, priority, deadline } = req.body;
+  const column = await Column.findById(columnId);
   if (!column) {
-    throw requestError(404, 'Not found');
+    throw requestError(404, 'Column not found');
   }
-  const newTask = new Task({
-    ...req.body,
-    column: columnId,
-    order: column.tasks.length,
+  const result = await Task.create({
+    title,
+    description,
+    priority,
+    deadline,
+    column: column._id,
   });
-  const savedTask = await newTask.save();
-  column.tasks.push(savedTask);
-  await column.updateOne({ tasks: column.tasks });
 
-  res.status(201).json(savedTask);
+  res.status(201).json(result);
 };
 
 module.exports = addTask;

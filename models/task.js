@@ -18,7 +18,7 @@ const taskSchema = new Schema(
       default: priorityArr.none,
     },
     deadline: {
-      type: Date,
+      type: String,
       required: [true, 'Deadline is required'],
     },
     column: {

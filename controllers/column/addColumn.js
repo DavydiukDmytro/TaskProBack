@@ -7,7 +7,7 @@ const addColumn = async (req, res) => {
   const board = await Board.findById(boardId);
 
   if (!board) {
-    throw requestError(409, 'Column not found');
+    throw requestError(409, 'Board not found');
   }
 
   const column = await Column.create({ title, board: board._id });

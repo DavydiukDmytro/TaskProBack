@@ -5,6 +5,7 @@ const addSchema = Joi.object({
   description: Joi.string().required(),
   deadline: Joi.string().required(),
   priority: Joi.string().valid('low', 'medium', 'high', 'none'),
+  columnId: Joi.string().required(),
 });
 
 const updateSchema = Joi.object({
