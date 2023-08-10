@@ -12,12 +12,6 @@ const columnSchema = new Schema(
       ref: 'board',
       required: [true, 'Board assignment for the column is required'],
     },
-    tasks: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'task',
-      },
-    ],
   },
   { versionKey: false, timestamps: false }
 );

@@ -1,7 +1,5 @@
 const { requestError } = require('../../helpers');
 const Board = require('../../models/board');
-const Task = require('../../models/task');
-const Column = require('../../models/column');
 
 const deleteBoard = async (req, res) => {
   const { boardId } = req.params;
