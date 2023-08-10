@@ -10,7 +10,7 @@ const columnSchema = new Schema(
     board: {
       type: Schema.Types.ObjectId,
       ref: 'board',
-      required: true,
+      required: [true, 'Board assignment for the column is required'],
     },
     tasks: [
       {

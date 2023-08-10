@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { handleMongooseError } = require('../helpers');
+const priorityArr = require('../constants/priorityArr');
 
 const taskSchema = new Schema(
   {
@@ -13,8 +14,8 @@ const taskSchema = new Schema(
     },
     priority: {
       type: String,
-      enum: ['high', 'medium', 'low', 'none'],
-      default: 'none',
+      enum: [...Object.values(priorityArr)],
+      default: priorityArr.none,
     },
     deadline: {
       type: String,
@@ -23,7 +24,7 @@ const taskSchema = new Schema(
     column: {
       type: Schema.Types.ObjectId,
       ref: 'column',
-      required: true,
+      required: [true, 'Column assignment for the task is required'],
     },
   },
   { versionKey: false, timestamps: false }

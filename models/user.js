@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+const themeArr = require('../constants/themeArr');
 const { handleMongooseError } = require('../helpers');
 const emailRegexp = require('../schemas/emailRegexp');
 
@@ -18,7 +18,8 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      minLength: [6, 'Password should be at least 6 characters long'],
+      minLength: [8, 'Password should be at least 8 characters long'],
+      maxLength: [64, 'The password must not exceed 64 characters'],
       required: [true, 'Set password for user'],
     },
     token: {
@@ -31,7 +32,8 @@ const userSchema = new Schema(
     },
     theme: {
       type: String,
-      default: 'dark',
+      enum: [...Object.values(themeArr)],
+      default: themeArr.dark,
     },
   },
   {
