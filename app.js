@@ -6,6 +6,7 @@ const swaggerDoc = require('./swagger.json');
 
 const userRouter = require('./routes/api/user');
 const boardRouter = require('./routes/api/board');
+const columnRouter = require('./routes/api/column');
 // const supportRouter = require('./routes/api/support');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.use('/api/user', userRouter);
 app.use('/api/board', boardRouter);
+app.use('/api/column', columnRouter);
 // app.use('/api/support', supportRouter);
 
 app.use((req, res) => {

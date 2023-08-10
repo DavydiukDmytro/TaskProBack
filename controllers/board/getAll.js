@@ -4,6 +4,7 @@ const Board = require('../../models/board');
 const getAll = async (req, res) => {
   const { _id: user } = req.user;
   const boards = await Board.find({ user }, { user: 0 });
+
   // const populatedBoards = await Promise.all(
   //   boards.map(async board => {
   //     const populatedColumns = await Column.find({ board: board._id })

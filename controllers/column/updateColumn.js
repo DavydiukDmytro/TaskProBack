@@ -11,9 +11,9 @@ const updateColumn = async (req, res) => {
     }
   );
   if (!result) {
-    throw requestError(404, 'Not found');
+    throw requestError(404, `Column ${columnId} not found`);
   }
-  res.status(200).json({ message: 'Successful update' });
+  res.status(200).json(result);
 };
 
 module.exports = updateColumn;

@@ -1,6 +1,6 @@
 const { controllerWrapper } = require('../../helpers');
 const addColumn = require('./addColumn');
-const addTask = require('./addTask');
+const addTask = require('../task/addTask');
 const deleteColumn = require('./deleteColumn');
 const updateColumn = require('./updateColumn');
 
