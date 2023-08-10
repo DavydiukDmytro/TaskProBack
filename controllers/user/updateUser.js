@@ -22,6 +22,7 @@ const updateUser = async (req, res) => {
   });
   res.status(200).json({
     user: {
+      id: result._id,
       email: result.email,
       name: result.name,
       avatarUrl: result.avatarUrl,

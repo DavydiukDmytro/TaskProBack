@@ -7,6 +7,7 @@ const current = async (req, res, next) => {
   }
   res.status(200).json({
     user: {
+      id: user._id,
       email: user.email,
       name: user.name,
       avatarUrl: user.avatarUrl,
