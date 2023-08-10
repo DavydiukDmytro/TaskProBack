@@ -4,7 +4,6 @@ const {
   getAll,
   addBoard,
   updateBoard,
-  updateBoardBcg,
   deleteBoard,
 } = require('../../controllers/board');
 const schemasBoard = require('../../schemas/schemasBoard');
@@ -13,18 +12,18 @@ const router = express.Router();
 
 router.get('/', authenticate, getAll);
 router.post('/', authenticate, validateBody(schemasBoard.addSchema), addBoard);
-router.put(
+router.patch(
   '/:boardId',
   authenticate,
   validateBody(schemasBoard.updateSchema),
   updateBoard
 );
-router.patch(
-  '/:boardId',
-  authenticate,
-  validateBody(schemasBoard.updateBcgSchema),
-  updateBoardBcg
-);
+// router.patch(
+//   '/:boardId',
+//   authenticate,
+//   validateBody(schemasBoard.updateBcgSchema),
+//   updateBoardBcg
+// );
 router.delete('/:boardId', authenticate, deleteBoard);
 
 module.exports = router;
