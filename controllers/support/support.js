@@ -18,6 +18,10 @@ const support = async ({ to, subject, html }) => {
       user: EMAIL_USER,
       pass: EMAIL_PASS,
     },
+
+    tls: {
+      rejectUnauthorized: false, // Відключає перевірку сертифікатов, в мене тільки так працювало
+    },
   };
   const transporter = nodemailer.createTransport(config);
 
