@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { handleMongooseError } = require('../helpers');
+const iconArr = require('../constants/iconArr');
 
 const boardSchema = new Schema(
   {
@@ -17,7 +18,10 @@ const boardSchema = new Schema(
     },
     user: {
       type: Schema.Types.ObjectId,
+      enum: [...Object.values(iconArr)],
+      default: iconArr.project,
       ref: 'user',
+      required: true,
     },
   },
   { versionKey: false, timestamps: false }

@@ -1,6 +1,6 @@
 const { requestError } = require('../../helpers');
 const User = require('../../models/user');
-
+// wdw
 const updateTheme = async (req, res) => {
   const theme = req.body.theme;
 

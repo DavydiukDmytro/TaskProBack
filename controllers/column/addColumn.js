@@ -1,10 +1,17 @@
+const { requestError } = require('../../helpers');
+const Board = require('../../models/board');
 const Column = require('../../models/column');
 
 const addColumn = async (req, res) => {
-  const { board: boardId } = req.body;
-  const columns = await Column.find({ board: boardId });
-  const newColumn = await Column.create({ ...req.body, order: columns.length });
-  res.status(201).json(newColumn);
+  const { boardId, title } = req.body;
+  const board = await Board.findById(boardId);
+
+  if (!board) {
+    throw requestError(409, 'Board not found');
+  }
+
+  const column = await Column.create({ title, board: board._id });
+  res.status(201).json(column);
 };
 
 module.exports = addColumn;

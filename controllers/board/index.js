@@ -2,6 +2,7 @@ const { controllerWrapper } = require('../../helpers');
 const addBoard = require('./addBoard');
 const deleteBoard = require('./deleteBoard');
 const getAll = require('./getAll');
+const getBoard = require('./getBoard');
 const updateBoard = require('./updateBoard');
 const updateBoardBcg = require('./updateBoardBcg');
 
@@ -11,4 +12,5 @@ module.exports = {
   updateBoard: controllerWrapper(updateBoard),
   updateBoardBcg: controllerWrapper(updateBoardBcg),
   deleteBoard: controllerWrapper(deleteBoard),
+  getBoard: controllerWrapper(getBoard),
 };

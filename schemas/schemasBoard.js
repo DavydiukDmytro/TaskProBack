@@ -7,9 +7,9 @@ const addSchema = Joi.object({
 });
 
 const updateSchema = Joi.object({
-  title: Joi.string().required(),
-  icon: Joi.string().required(),
-  background: Joi.string().required(),
+  title: Joi.string(),
+  icon: Joi.string(),
+  background: Joi.string(),
 });
 
 const updateBcgSchema = Joi.object({
