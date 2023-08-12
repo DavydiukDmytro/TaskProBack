@@ -21,7 +21,7 @@ const messageInSupport = async (req, res) => {
   const messageText = message;
 
   await support({
-    to: 'taskpro.project@gmail.com', // Пошта з тех завдання
+    to: userEmail, // Пошта з тех завдання
     subject: 'Technical support message',
     html: merkupLetter(userEmail, messageText),
   });
