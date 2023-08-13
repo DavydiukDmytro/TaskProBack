@@ -108,18 +108,7 @@
       "get": {
         "summary": "Check user",
         "tags": ["User"],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDJhYzRlYTE0NDA3YjRkZTYxNDEzZiIsImlhdCI6MTY5MTUyODQ2MSwiZXhwIjoxNjkxNTM1NjYxfQ.jDTKRIEVTd00tXFDmpo_B9LfMYxjSQv6wGDL8qp6uKY"
-            }
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
@@ -143,18 +132,7 @@
       "patch": {
         "summary": "Update user's theme",
         "tags": ["User"],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
-            }
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": true,
@@ -195,25 +173,13 @@
       "patch": {
         "summary": "Update user",
         "tags": ["User"],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
-            }
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "type": "object",
                 "$ref": "#/components/schemas/UserUpdateRequest"
               }
             }
@@ -238,18 +204,7 @@
       "post": {
         "summary": "User's logout",
         "tags": ["User"],
-        "parameters": [
-          {
-            "name": "Authorization Token",
-            "in": "header",
-            "description": "Bearer token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQyYjI4MzEyY2YzYWJlYTExNjMzNCIsImlhdCI6MTY4NzQzMjM1MSwiZXhwIjoxNjg3NTE4NzUxfQ.DCEB2Q0lghWYieYxiZohu4uMMpwMYFa55XOqMgggVVg"
-            }
-          }
-        ],
+        "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
           "204": {
@@ -375,28 +330,13 @@
         "properties": {
           "avatar": {
             "type": "string",
+            "format": "binary",
             "description": "User's avatar file"
           },
-          "name": {
-            "type": "string",
-            "description": "User's name",
-            "example": "John"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "User's email",
-            "example": "john.smith@gmail.com"
-          },
-          "password": {
-            "type": "string",
-            "minLength": 8,
-            "maxLength": 32,
-            "description": "User's password",
-            "example": "qwerty1234"
+          "updateInfo": {
+            "type": "string"
           }
-        },
-        "required": ["name", "email", "password"]
+        }
       },
       "UserUpdateResponse": {
         "type": "object",
