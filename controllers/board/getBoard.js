@@ -1,6 +1,5 @@
 const { Types } = require('mongoose');
 const Column = require('../../models/column');
-const { requestError } = require('../../helpers');
 
 const getBoard = async (req, res) => {
   const { boardId } = req.params;
@@ -24,7 +23,7 @@ const getBoard = async (req, res) => {
   ]);
 
   if (result.length === 0) {
-    throw requestError(404, 'Board not found');
+    res.json([]);
   }
 
   res.json([...result]);
