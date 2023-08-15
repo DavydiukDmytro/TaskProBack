@@ -1,16 +1,18 @@
 const { requestError } = require('../../helpers');
 const Column = require('../../models/column');
+const Task = require('../../models/task');
 
 const deleteColumn = async (req, res) => {
   const { columnId } = req.params;
-  const column = await Column.findByIdAndDelete(columnId);
+  const column = await Column.findById(columnId);
   if (!column) {
-    throw requestError(404, `Column ${columnId} not found`);
+    throw requestError(404, 'Column not found');
   }
-
-  // const { tasks } = column;
-  // await Task.deleteMany({ _id: { $in: tasks.map(task => task._id) } });
-  // await Column.findByIdAndDelete(columnId);
+  await Task.deleteMany({ column: column._id });
+  const result = await Column.findByIdAndDelete(columnId);
+  if (!result) {
+    throw requestError(404, `Task ${columnId} not found`);
+  }
 
   res.status(204).json();
 };
