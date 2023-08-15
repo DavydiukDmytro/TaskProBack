@@ -14,7 +14,7 @@ const deleteColumn = async (req, res) => {
     throw requestError(404, `Task ${columnId} not found`);
   }
 
-  res.status(200).json();
+  res.status(204).json();
 };
 
 module.exports = deleteColumn;
