@@ -17,7 +17,7 @@ const deleteBoard = async (req, res) => {
     await Column.findByIdAndDelete(column._id);
   }
   await Board.findByIdAndDelete(boardId);
-  res.status(200).json();
+  res.status(204).json();
 };
 
 module.exports = deleteBoard;
