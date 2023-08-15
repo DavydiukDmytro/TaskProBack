@@ -14,9 +14,9 @@ const deleteBoard = async (req, res) => {
 
   for (const column of columns) {
     await Task.deleteMany({ column: column._id });
-    await column.remove();
+    await Column.findByIdAndDelete(column._id);
   }
-  await board.remove();
+  await Board.findByIdAndDelete(boardId);
   res.status(200).json();
 };
 

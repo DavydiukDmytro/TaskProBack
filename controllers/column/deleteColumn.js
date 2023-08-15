@@ -1,6 +1,6 @@
 const { requestError } = require('../../helpers');
 const Column = require('../../models/column');
-const Task = require('../../models/task'); 
+const Task = require('../../models/task');
 
 const deleteColumn = async (req, res) => {
   const { columnId } = req.params;
@@ -9,9 +9,12 @@ const deleteColumn = async (req, res) => {
     throw requestError(404, 'Column not found');
   }
   await Task.deleteMany({ column: column._id });
-  await column.remove();
-  res.status(200).json()
+  const result = await Column.findByIdAndDelete(columnId);
+  if (!result) {
+    throw requestError(404, `Task ${columnId} not found`);
+  }
+
+  res.status(200).json();
 };
 
 module.exports = deleteColumn;
-
